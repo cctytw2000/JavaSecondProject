@@ -1,0 +1,30 @@
+package com.eeit109team6.servletmember;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet("/MemberDetails")
+public class MemberDetails extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		System.out.println(session.getAttribute("username"));
+		System.out.println(session.getAttribute("token"));
+		System.out.println(session.getAttribute("account"));
+		System.out.println(session.getAttribute("member_id"));
+
+//		session.setAttribute("username", member.getUsername());
+//		session.setAttribute("token", member.getToken());
+//		session.setAttribute("account", member.getAccount());
+//		session.setAttribute("member_id", member.getMember_id());
+	}
+
+}

@@ -1,0 +1,42 @@
+fieldset {
+	width: 50%;
+	height: 70%;
+	border: 2px solid lightgreen;
+	border-radius: 20px;
+	margin: auto auto;
+	padding: auto auto;
+	box-shadow: 5px 5px 5px green;
+}
+
+.div1 {
+	border-bottom: 2px solid blue;
+	padding-bottom: 20px;
+	margin: 20px;
+	width: 450px;
+	width: 80%
+}
+
+.sub1 {
+	width: 450px;
+	text-align: center;
+	padding: 20px;
+}
+
+.label1 {
+	width: 100px;
+	float: left;
+	text-align: right
+}
+
+form {
+	width: 100%;
+	/* margin: 15px auto; */
+}
+
+h6 {
+	text-align: center
+}
+
+input:focus {
+	background-color: #cccccc
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>Member</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>html/LoginMember.html</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>demoRegisteredMember</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.RegisteredMember</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>demoRegisteredMember</servlet-name>
+		<url-pattern>/RegisteredMember.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CheckMember</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.CheckMember</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckMember</servlet-name>
+		<url-pattern>/CheckMember.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>LoginMember</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.LoginMember</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginMember</servlet-name>
+		<url-pattern>/LoginMember.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>LogOutMember</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.LogOutMember</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogOutMember</servlet-name>
+		<url-pattern>/LogOutMember.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>FerGetPWD</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.FerGetPWD</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FerGetPWD</servlet-name>
+		<url-pattern>/FerGetPWD.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>forgetPWDInsertNewPassowrd</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.forgetPWDInsertNewPassowrd</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>forgetPWDInsertNewPassowrd</servlet-name>
+		<url-pattern>/forgetPWDInsertNewPassowrd.do</url-pattern>
+	</servlet-mapping>
+	
+	
+		<servlet>
+		<servlet-name>Check_Repeat</servlet-name>
+		<servlet-class>com.eeit109team6.servletmember.Check_Repeat</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Check_Repeat</servlet-name>
+		<url-pattern>/Check_Repeat.do</url-pattern>
+	</servlet-mapping>
+
+</web-app>

@@ -1,0 +1,217 @@
+package com.eeit109team6.memberDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class MemberDaoJdbcImpl implements IMemberDao {
+
+	private Connection conn;
+	private ConnSQLserver jdbc;
+
+	@Override
+	public int add(Member m, Connection conn) throws SQLException {
+		String sqlcode = "insert into member(account,password,username,idnumber,sex,birth,registeredtime,isactive,token) values(?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement state = conn.prepareStatement(sqlcode, Statement.RETURN_GENERATED_KEYS);
+		state.setString(1, m.getAccount());
+		state.setString(2, m.getPassword());
+		state.setString(3, m.getUsername());
+		state.setString(4, m.getIdnumber());
+		state.setString(5, m.getSex());
+		state.setString(6, m.getBirth());
+		state.setString(7, m.getRegisteredtime());
+		state.setInt(8, m.getIsactive());
+		state.setString(9, m.getToken());
+		int i = state.executeUpdate();
+		ResultSet InsertMemberId = state.getGeneratedKeys();
+
+		InsertMemberId.next();
+
+		int key = InsertMemberId.getInt(1);
+
+//		System.out.println("key="+key);
+
+		state.close();
+
+		return key;
+
+//		private String account ;
+//		private String password ;
+//		private String username ;
+//		private String idnumber ;
+//		private String sex ;
+//		private String birth ;
+//		private String registeredtime ;
+
+	}
+
+	@Override
+	public void update(Member m, Connection conn) throws SQLException {
+		String sqlcode = "update member set  account = ?,password = ?,username = ?,idnumber = ?,sex = ?,birth = ? where member_id = ? ";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		state.setString(1, m.getAccount());
+		state.setString(2, m.getPassword());
+		state.setString(3, m.getUsername());
+		state.setString(4, m.getIdnumber());
+		state.setString(5, m.getSex());
+		state.setString(6, m.getBirth());
+		state.setInt(7, m.getMember_id());
+		state.executeUpdate();
+		state.close();
+	}
+
+	@Override
+	public void delete(Member m, Connection conn) throws SQLException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public ArrayList<Member> fintAll(Connection conn) throws SQLException {
+		ArrayList<Member> memberList = new ArrayList<Member>();
+//		List<String> memberColName = new ArrayList<String>();
+		String sqlcode = "select * from member ";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		ResultSet rs = state.executeQuery();
+//		ResultSetMetaData metadata = rs.getMetaData();
+//		for (int i = 0 ;i< metadata.getColumnCount() ;i++) {
+//			memberColName.add(metadata.getColumnName(i));
+//		}
+		while (rs.next()) {
+			Member m = new Member();
+			m.setMember_id(rs.getInt("member_id"));
+			m.setAccount(rs.getString("account"));
+			m.setPassword(rs.getString("password"));
+			m.setUsername(rs.getString("username"));
+			m.setIdnumber(rs.getString("idnumber"));
+			m.setSex(rs.getString("sex"));
+			m.setBirth(rs.getString("birth"));
+			m.setRegisteredtime(rs.getString("registeredtime"));
+			memberList.add(m);
+
+//			private int member_id;
+//			private String account ;
+//			private String password ;
+//			private String username ;
+//			private String idnumber ;
+//			private String sex ;
+//			private String birth ;
+//			private String registeredtime ;
+
+//			state.setString(1, m.getAccount());
+//			state.setString(2, m.getPassword());
+//			state.setString(3, m.getUsername());
+//			state.setString(4, m.getIdnumber());
+//			state.setString(5, m.getSex());
+//			state.setString(6, m.getBirth());
+//			state.setString(7, m.getRegisteredtime());
+
+		}
+		rs.close();
+		state.close();
+		return memberList;
+	}
+
+	@Override
+	public Member fintById(Member m, Connection conn) throws SQLException {
+		String sqlcode = "select * from member where member_id = ?";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		state.setInt(1, m.getMember_id());
+		ResultSet rs = state.executeQuery();
+		if (rs.next()) {
+
+		}
+		return null;
+	}
+
+	@Override
+	public Member login(Member m, Connection conn) throws SQLException {
+		String sqlcode = "select *  from member where account = ? and password = ? and isactive = 1";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		state.setString(1, m.getAccount());
+		state.setString(2, m.getPassword());
+		ResultSet rs = state.executeQuery();
+		Member memberData = null;
+
+		while (rs.next()) {
+			memberData = new Member();
+			System.out.println("rs.getInt(\"member_id\")==" + rs.getInt("member_id"));
+			memberData.setMember_id(rs.getInt("member_id"));
+			memberData.setAccount(rs.getString("account"));
+			memberData.setPassword(rs.getString("password"));
+			memberData.setUsername(rs.getString("username"));
+			memberData.setIdnumber(rs.getString("idnumber"));
+			memberData.setSex(rs.getString("sex"));
+			memberData.setBirth(rs.getString("birth"));
+			memberData.setRegisteredtime(rs.getString("registeredtime"));
+
+		}
+		rs.close();
+		state.close();
+		return memberData;
+	}
+
+	@Override
+	public boolean openActive(Member m, Connection conn) throws SQLException {
+		String sqlcode = "update member set isactive = 1 where member_id = ? and token = '" + m.getToken()
+				+ "' and isactive = 0";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		state.setInt(1, m.getMember_id());
+		System.out.println("m.getMember_id()=" + m.getMember_id());
+		System.out.println("m.getToken()=" + m.getToken());
+//		state.setString(2, m.getToken());
+		int check = state.executeUpdate();
+		if (check == 1) {
+			state.close();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void forgetPwd(Member m, Connection conn) throws SQLException {
+
+		String sqlcode = "update member set  token = ? where account = ? ";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		state.setString(1, m.getToken());
+		state.setString(2, m.getAccount());
+
+		state.executeUpdate();
+		state.close();
+
+	}
+
+	@Override
+	public void changePwd(Member m, Connection conn, String oldpassowrd) throws SQLException {
+		String sqlcode = "update member set password=? where account =? and password = ? and token = ?";
+		PreparedStatement state = conn.prepareStatement(sqlcode);
+		state.setString(1, m.getPassword());
+		state.setString(2, m.getAccount());
+		state.setString(3, oldpassowrd);
+		state.setString(4, m.getToken());
+		int i = state.executeUpdate();
+		System.out.println("�ק�" + i + "�����");
+
+		state.close();
+	}
+
+	@Override
+	public void createConn() throws SQLException {
+//		conn = jdbc.getConnection();
+		conn = jdbc.getConnection();
+		System.out.println("status  " + !conn.isClosed());
+	}
+
+	@Override
+	public void closeConn() throws SQLException {
+
+		jdbc.closeConn();
+
+	}
+
+}

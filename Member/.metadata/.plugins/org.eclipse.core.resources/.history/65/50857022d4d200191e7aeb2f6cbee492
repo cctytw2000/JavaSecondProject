@@ -1,0 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="CSS/main.css">
+</head>
+<body>
+	<div id="allpage">
+		<header>
+			<nav>
+				<ul class="menu">
+					<li><a href="#">回首頁</a></li>
+					<li><a href="#">遊戲討論區</a></li>
+					<li><a href="#">遊戲商城</a></li>
+					<li><a href="#">電競新聞</a></li>
+					<c:choose>
+						<c:when test="${sessionScope.account != Null}">
+							<li><a href="./MemberDetails.do">會員中心</a></li>
+							<li><a href="./LogOutMember.do">登出</a></li>
+							<span class="welcome">${sessionScope.username} 您好!</span>
+						</c:when>
+						<c:otherwise>
+							<li><a href="member/RegisteredMember.html">註冊會員</a></li>
+							<li><a href="member/LoginMember.html">登入會員</a></li>
+						</c:otherwise>
+
+					</c:choose>
+				</ul>
+			</nav>
+			
+		<jsp:useBean id="member" scope="request"
+			class="com.eeit109team6.memberDao.Member" />
+		
+		</header>
+		
+		
+		<div class="content">
+        <article>
+            <h2 class="title">${member.getUsername()}</h2>
+            <section>
+                <h3>設計全方位服務 專案執行無斷層 </h3>
+                <p>
+                    隨著網路科技迅速發展，人與人之間關係的連結多了一種新的溝通模式，基於這樣的基礎架構下，
+                    成立設計部門、網路行銷部門及IT研發部門，持續創新網路行銷策略及技術來服務客戶，提供六大服務項目：
+                    網路公關行銷、網站設計建置、APP程式開發、UI介面設計、企業識別規劃、平面視覺規劃來滿足客戶的需求。
+                </p>
+            </section>
+            <section>
+                <h3>擁有資訊技術研發團隊</h3>
+                <p>
+                    為了因應市場的快速變化以及提昇客戶資訊化的競爭力，我們於2004年成立資訊技術研發團隊，其主要任務為：
+                    <!--請在此加上項目清單及清單項目並套用list1樣式-->
+                    <ul class="list">
+                        <li>開發及建置大型網站平台及後台管理機制</li>
+                        <li>App與雲端整合技術</li>
+                        <li>研究數位行銷機制</li>
+                        <li>協助客戶整合現有的異質系統</li>
+                    </ul>
+                    
+                    
+                    
+                    
+                </p>
+                <p>
+                    2000設立至今，框體整合了行銷、美學及科技的元素，協助客戶共同創造、佈新、維持產品及服務的品牌形象，
+                    以及與其客戶之間的關係。我們始終堅持「不只服務客戶需求，更要滿足客戶的客戶」的價值鏈，並將這信念融
+                    入在所有專案執行的過程。
+                </p>
+            </section>
+        </article>
+
+
+      
+    </div>
+	</div>
+
+
+</body>
+</html>

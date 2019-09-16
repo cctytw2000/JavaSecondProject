@@ -1,0 +1,9 @@
+let opens1 = false;
+let opens2 = false;
+let opens3 = false;
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("account").addEventListener("blur", check_account);
+    document.getElementById("username").addEventListener("blur", check_username); //事件繫結，事件氣泡(bubbling)
+    document.getElementById("password").addEventListener("blur", check_password);
+    document.getElementById("date").addEventListener("blur", opencreate);
+});

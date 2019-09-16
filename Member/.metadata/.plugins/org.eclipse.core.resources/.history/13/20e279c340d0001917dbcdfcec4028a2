@@ -1,0 +1,13 @@
+let opens1 = false;
+let opens2 = false;
+let opens3 = false;
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("re_password").addEventListener("input", check_re_PWD);//事件繫結，事件氣泡(bubbling)
+    document.getElementById("re_password").addEventListener("blur", open);
+
+});
+function check_re_PWD(){
+	document.getElementById("re_password")
+	}
+}
+
